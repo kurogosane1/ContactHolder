@@ -8,6 +8,8 @@ const path = require('path');
 //Connect Datebase
 connectDB();
 
+//Init Middleware
+app.use(express.json({ extended: false }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.text());
@@ -17,9 +19,6 @@ app.use('/api/users', require('./Routes/users'));
 app.use('/api/auth', require('./Routes/auth'));
 app.use('/api/contacts', require('./Routes/contacts'));
 
-//Init Middleware
-app.use(express.json({ extended: false }));
-
 // app.get('/', (req, res) => {
 // 	res.send({ msg: 'Welcome to the contact API' });
 // });
@@ -27,7 +26,9 @@ app.use(express.json({ extended: false }));
 //Serve Static Assets in production
 if (process.env.NODE_ENV === 'production') {
 	//Set Static Folder
-	app.use(express.static(path.join(__dirname, 'client/build')));
+	app.use(express.static('client/build'));
+
+	
 	app.get('*', (req, res) =>
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
 	);
