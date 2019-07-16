@@ -10,10 +10,10 @@ connectDB();
 
 //Init Middleware
 app.use(express.json({ extended: false }));
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
-app.use(bodyParser.text());
-app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
+// app.use(bodyParser.json());
+// app.use(bodyParser.urlencoded({ extended: true }));
+// app.use(bodyParser.text());
+// app.use(bodyParser.json({ type: 'application/vnd.api+json' }));
 
 app.use('/api/users', require('./Routes/users'));
 app.use('/api/auth', require('./Routes/auth'));
@@ -28,8 +28,8 @@ if (process.env.NODE_ENV === 'production') {
 	//Set Static Folder
 	app.use(express.static('client/build'));
 
-	
-	app.get('*', (req, res) =>
+
+	app.get('/', (req, res) =>
 		res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
 	);
 }
