@@ -32,5 +32,5 @@ if (process.env.NODE_ENV === 'production') {
 		res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'))
 	);
 }
-
+// "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
 app.listen(PORT, () => console.log(`server started on port ${PORT}`));
